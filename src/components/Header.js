@@ -5,7 +5,7 @@ import { arrayOf, shape, string } from 'prop-types';
 class Header extends Component {
   render() {
     const { email, expenses } = this.props;
-    const total = expenses.reduce((acc, { price }) => acc + price, 0);
+    const total = expenses.reduce((acc, { value }) => acc + Number(value), 0);
     return (
       <header>
         <div data-testid="email-field">{ email }</div>
@@ -18,7 +18,7 @@ class Header extends Component {
 
 Header.propTypes = {
   email: string,
-  expenses: arrayOf(shape({ price: string })),
+  expenses: arrayOf(shape({ value: string })),
 }.isRequired;
 
 const mapStateToProps = (state) => {

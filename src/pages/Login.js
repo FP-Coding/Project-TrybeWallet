@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { func, shape } from 'prop-types';
-import submitLogin from '../redux/actions';
+import { submitLogin } from '../redux/actions';
 
 const MINIMUM_LENGTH_PASSWORD = 6;
 class Login extends React.Component {
