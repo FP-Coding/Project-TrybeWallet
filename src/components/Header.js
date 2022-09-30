@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string } from 'prop-types';
+import roundNumber from '../helpers/roundNumber';
 
 class Header extends Component {
   render() {
@@ -8,7 +9,9 @@ class Header extends Component {
     const total = expenses.reduce(
       (acc, expense) => {
         const { currency, exchangeRates, value } = expense;
-        return acc + ((Number(value) * Number(exchangeRates[currency].ask)));
+        const valueExpense = Number(value);
+        const valueCurrency = Number(exchangeRates[currency].ask);
+        return acc + ((valueExpense * valueCurrency));
       },
       0,
     );
@@ -16,7 +19,7 @@ class Header extends Component {
       <header>
         <div data-testid="email-field">{email}</div>
         <div data-testid="total-field">
-          {total.toFixed(2)}
+          {roundNumber(total)}
         </div>
         <div data-testid="header-currency-field">BRL</div>
       </header>

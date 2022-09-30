@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { string, shape, arrayOf, number } from 'prop-types';
 import { connect } from 'react-redux';
+import roundNumber from '../helpers/roundNumber';
 
 class Table extends Component {
   render() {
@@ -31,21 +32,22 @@ class Table extends Component {
               tag,
               method,
             }) => {
-              const valueCurrency = parseFloat(exchangeRates[currency].ask).toFixed(2);
-              const valorConvertido = (Number(value) * Number(exchangeRates[currency].ask)
-                .toFixed(2));
+              const valueExpense = Number(value);
+              const valueCurrency = parseFloat(exchangeRates[currency].ask);
+              const valorConvertido = valueExpense * valueCurrency;
+              const nameCoin = exchangeRates[currency].name;
               return ((
                 <tr key={ id }>
                   <td>{description}</td>
                   <td>{tag}</td>
                   <td>{method}</td>
-                  <td>{Number(value).toFixed(2)}</td>
-                  <td>{currency}</td>
-                  <td>{ valueCurrency }</td>
+                  <td>{roundNumber(valueExpense)}</td>
+                  <td>{nameCoin}</td>
+                  <td>{roundNumber(valueCurrency)}</td>
                   <td>
-                    {valorConvertido}
+                    {roundNumber(valorConvertido)}
                   </td>
-                  <td>{exchangeRates[currency].name}</td>
+                  <td>Real</td>
                   <td>
                     <button type="button">Editar</button>
                     <button type="button">Remover</button>
