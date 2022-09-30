@@ -5,7 +5,6 @@ export default async function requestApiCurrency() {
     const response = await request.json();
     return response;
   } catch (error) {
-    console.log(error);
     return error;
   }
 }

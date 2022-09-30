@@ -6,7 +6,7 @@ const roundNumber = (num) => {
   };
   const numberArredondado = num.toLocaleString('pt-BR', objectLocaleString);
   const numberWithoutSpace = numberArredondado.split('')
-    .filter((letter, index) => index !== 2).join('');
+    .filter((_, index) => index !== 2).join('');
   const numberComvirgula = numberWithoutSpace.split('$')[1];
   const numberCorrigido = numberComvirgula.split(',');
 
