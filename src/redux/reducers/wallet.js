@@ -1,6 +1,7 @@
 import {
   ADD_EXPENSE,
   IS_FETCHING,
+  REMOVE_EXPENSE,
   REQUEST_FAILURE,
   REQUEST_SUCESS,
 } from '../actions/actionTypes';
@@ -38,6 +39,11 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
     return {
       ...state,
       expenses: [...state.expenses, payload],
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== payload.id),
     };
   default:
     return state;

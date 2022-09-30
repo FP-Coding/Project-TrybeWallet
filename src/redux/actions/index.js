@@ -4,6 +4,7 @@ import {
   REQUEST_FAILURE,
   REQUEST_SUCESS,
   ADD_EXPENSE,
+  REMOVE_EXPENSE,
 } from './actionTypes';
 import requestApiCurrency from '../../helpers/apiCurrencies';
 // Coloque aqui suas actions
@@ -24,6 +25,11 @@ export const requestSucess = (currencies) => ({
 
 export const addExpense = (expense) => ({
   type: ADD_EXPENSE,
+  payload: expense,
+});
+
+export const removeExpense = (expense) => ({
+  type: REMOVE_EXPENSE,
   payload: expense,
 });
 
