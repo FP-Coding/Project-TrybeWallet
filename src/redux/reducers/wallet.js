@@ -1,4 +1,5 @@
 import {
+  ADD_EXPENSE,
   IS_FETCHING,
   REQUEST_FAILURE,
   REQUEST_SUCESS,
@@ -32,6 +33,11 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
       ...state,
       error: payload.error,
       loading: false,
+    };
+  case ADD_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses, payload],
     };
   default:
     return state;

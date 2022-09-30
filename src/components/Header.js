@@ -5,11 +5,20 @@ import { arrayOf, shape, string } from 'prop-types';
 class Header extends Component {
   render() {
     const { email, expenses } = this.props;
-    const total = expenses.reduce((acc, { value }) => acc + Number(value), 0);
+    const total = expenses.reduce(
+      (acc, expense) => {
+        const { currency, exchangeRates, value } = expense;
+        console.log(exchangeRates.BTC.ask);
+        return acc + ((Number(value) * Number(exchangeRates[currency].ask)));
+      },
+      0,
+    );
     return (
       <header>
-        <div data-testid="email-field">{ email }</div>
-        <div data-testid="total-field">{ total.toFixed(2) }</div>
+        <div data-testid="email-field">{email}</div>
+        <div data-testid="total-field">
+          {total.toFixed(2)}
+        </div>
         <div data-testid="header-currency-field">BRL</div>
       </header>
     );
