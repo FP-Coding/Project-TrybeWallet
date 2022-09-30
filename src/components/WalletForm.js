@@ -9,7 +9,7 @@ class WalletForm extends Component {
     valueInput: '',
     currencyInput: 'USD',
     methodInput: 'Dinheiro',
-    tagInput: 'food',
+    tagInput: 'Alimentação',
     descriptionInput: '',
   };
 
@@ -41,7 +41,7 @@ class WalletForm extends Component {
       valueInput: '',
       currencyInput: 'USD',
       methodInput: 'Dinheiro',
-      tagInput: 'food',
+      tagInput: 'Alimentação',
       descriptionInput: '',
     });
   };

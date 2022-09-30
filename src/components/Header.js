@@ -8,7 +8,6 @@ class Header extends Component {
     const total = expenses.reduce(
       (acc, expense) => {
         const { currency, exchangeRates, value } = expense;
-        console.log(exchangeRates.BTC.ask);
         return acc + ((Number(value) * Number(exchangeRates[currency].ask)));
       },
       0,
