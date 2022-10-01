@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { string, shape, arrayOf, number, func } from 'prop-types';
 import { connect } from 'react-redux';
 import roundNumber from '../helpers/roundNumber';
-import { removeExpense } from '../redux/actions';
+import { editExpense, removeExpense } from '../redux/actions';
 
 class Table extends Component {
   render() {
-    const { expenses, toRemoveExpense } = this.props;
+    const { expenses, toRemoveExpense, toEditExpense } = this.props;
+    console.log(expenses);
     return (
       <table>
         <thead>
@@ -51,7 +52,13 @@ class Table extends Component {
                   </td>
                   <td>Real</td>
                   <td>
-                    <button type="button">Editar</button>
+                    <button
+                      type="button"
+                      onClick={ () => toEditExpense(id) }
+                      data-testid="edit-btn"
+                    >
+                      Editar
+                    </button>
                     <button
                       type="button"
                       onClick={ () => toRemoveExpense(expense) }
@@ -92,6 +99,7 @@ const mapStateToProps = ({ wallet }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   toRemoveExpense: (expenseToBeRemoved) => dispatch(removeExpense(expenseToBeRemoved)),
+  toEditExpense: (idExpenseToBeEdited) => dispatch(editExpense(idExpenseToBeEdited)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

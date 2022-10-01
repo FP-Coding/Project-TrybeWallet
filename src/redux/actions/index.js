@@ -1,15 +1,13 @@
 import {
   SUBMIT_LOGIN,
-  IS_FETCHING,
   REQUEST_FAILURE,
   REQUEST_SUCESS,
   ADD_EXPENSE,
   REMOVE_EXPENSE,
+  EDIT_EXPENSE,
+  SUBMIT_EDIT_EXPENSE,
 } from './actionTypes';
 import requestApiCurrency from '../../helpers/apiCurrencies';
-// Coloque aqui suas actions
-
-export const isFetching = () => ({ type: IS_FETCHING });
 
 export const requestFailure = (error) => ({ type: REQUEST_FAILURE, payload: error });
 
@@ -33,9 +31,18 @@ export const removeExpense = (expense) => ({
   payload: expense,
 });
 
+export const editExpense = (id) => ({
+  type: EDIT_EXPENSE,
+  payload: id,
+});
+
+export const submitEditExpense = (payload) => ({
+  type: SUBMIT_EDIT_EXPENSE,
+  payload,
+});
+
 export const requestApi = () => async (dispatch) => {
   try {
-    dispatch(isFetching());
     const responseApi = await requestApiCurrency();
     dispatch(requestSucess(responseApi));
   } catch (error) {
