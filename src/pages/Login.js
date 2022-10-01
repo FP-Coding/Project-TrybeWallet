@@ -21,6 +21,7 @@ class Login extends React.Component {
   verifyEmailandPassword = () => {
     const { email, password } = this.state;
     const verifyEmail = email.endsWith('.com')
+    && !email.endsWith('@.com')
     && !email.startsWith('@')
     && email.includes('@');
     const verifyPassword = password.length >= MINIMUM_LENGTH_PASSWORD;

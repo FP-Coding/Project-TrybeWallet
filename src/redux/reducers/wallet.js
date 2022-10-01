@@ -10,7 +10,7 @@ import {
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  idToEdit: 0,
+  idToEdit: '',
   loading: false,
 };
 
@@ -54,6 +54,7 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
         return expense;
       })],
       isEditing: false,
+      idToEdit: '',
     };
   default:
     return state;
