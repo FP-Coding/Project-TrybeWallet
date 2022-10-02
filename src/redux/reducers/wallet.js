@@ -5,6 +5,7 @@ import {
   REQUEST_SUCESS,
   EDIT_EXPENSE,
   SUBMIT_EDIT_EXPENSE,
+  IS_FETCHING,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 function wallet(state = INITIAL_STATE, { type, payload }) {
   switch (type) {
+  case IS_FETCHING:
+    return {
+      ...state,
+      loading: true,
+    };
   case REQUEST_SUCESS:
     return {
       ...state,

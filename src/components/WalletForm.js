@@ -59,7 +59,7 @@ class WalletForm extends Component {
 
   render() {
     const { handleChange, submitForm, props, state, submitEdit } = this;
-    const { currencies, isEditing } = props;
+    const { currencies, isEditing, isLoading } = props;
     const {
       valueInput,
       currencyInput,
@@ -87,22 +87,23 @@ class WalletForm extends Component {
             onChange={ handleChange }
           />
         </label>
-        <label htmlFor="currency-input">
-          Moeda:
-          <select
-            name="currencyInput"
-            id="currency-input"
-            data-testid="currency-input"
-            value={ currencyInput }
-            onChange={ handleChange }
-          >
-            {currencies.map((symbol) => (
-              <option key={ symbol } value={ symbol }>
-                {symbol}
-              </option>
-            ))}
-          </select>
-        </label>
+        {isLoading ? <p>Carregando</p> : (
+          <label htmlFor="currency-input">
+            Moeda:
+            <select
+              name="currencyInput"
+              id="currency-input"
+              data-testid="currency-input"
+              value={ currencyInput }
+              onChange={ handleChange }
+            >
+              {currencies.map((symbol) => (
+                <option key={ symbol } value={ symbol }>
+                  {symbol}
+                </option>
+              ))}
+            </select>
+          </label>)}
         <label htmlFor="method-input">
           Método de pagamento:
           <select
@@ -190,6 +191,7 @@ const mapStateToProps = ({ wallet }) => ({
   idToEdit: wallet.idToEdit,
   expenses: wallet.expenses,
   isEditing: wallet.isEditing,
+  isLoading: wallet.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
