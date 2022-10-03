@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { func, shape } from 'prop-types';
+import Button from 'react-bootstrap/Button';
 import { submitLogin } from '../redux/actions';
 
 const MINIMUM_LENGTH_PASSWORD = 6;
@@ -48,7 +49,7 @@ class Login extends React.Component {
     const { email, password, isDisabled } = state;
     return (
       <div>
-        <form>
+        <form className="d-grid gap-2">
           <input
             type="email"
             name="email"
@@ -63,13 +64,15 @@ class Login extends React.Component {
             data-testid="password-input"
             onChange={ handleChange }
           />
-          <button
+          <Button
             type="submit"
+            variant="success"
+            size="lg"
             disabled={ isDisabled }
             onClick={ (e) => submitLoginAndGoToWallet(e, state) }
           >
             Entrar
-          </button>
+          </Button>
         </form>
       </div>
     );
