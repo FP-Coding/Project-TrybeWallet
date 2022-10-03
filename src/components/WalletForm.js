@@ -13,7 +13,13 @@ const INITIAL_STATE = {
 };
 
 class WalletForm extends Component {
-  state = INITIAL_STATE;
+  state = {
+    valueInput: '',
+    currencyInput: 'USD',
+    methodInput: 'Dinheiro',
+    tagInput: 'Alimentação',
+    descriptionInput: '',
+  };
 
   componentDidMount() {
     const { requestApiOfCurrencies } = this.props;
@@ -87,7 +93,7 @@ class WalletForm extends Component {
             onChange={ handleChange }
           />
         </label>
-        {isLoading ? <p>Carregando</p> : (
+        {isLoading ? <p data-testid="carregando">Carregando</p> : (
           <label htmlFor="currency-input">
             Moeda:
             <select
@@ -145,7 +151,6 @@ class WalletForm extends Component {
             onChange={ handleChange }
           />
         </label>
-
         {isEditing ? (
           <button type="submit" onClick={ (e) => submitEdit(e, expense) }>
             Editar despesa
@@ -183,6 +188,7 @@ WalletForm.propTypes = {
   submitWalletForm: func,
   idToEdit: number,
   isEditing: bool,
+  error: string,
 }.isRequired;
 
 const mapStateToProps = ({ wallet }) => ({
@@ -192,6 +198,7 @@ const mapStateToProps = ({ wallet }) => ({
   expenses: wallet.expenses,
   isEditing: wallet.isEditing,
   isLoading: wallet.loading,
+  error: wallet.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

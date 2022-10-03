@@ -1,6 +1,5 @@
 import {
   SUBMIT_LOGIN,
-  REQUEST_FAILURE,
   REQUEST_SUCESS,
   ADD_EXPENSE,
   REMOVE_EXPENSE,
@@ -9,8 +8,6 @@ import {
   IS_FETCHING,
 } from './actionTypes';
 import requestApiCurrency from '../../helpers/apiCurrencies';
-
-export const requestFailure = (error) => ({ type: REQUEST_FAILURE, payload: error });
 
 export const isRequesting = () => ({ type: IS_FETCHING });
 
@@ -45,12 +42,7 @@ export const submitEditExpense = (payload) => ({
 });
 
 export const requestApi = () => async (dispatch) => {
-  try {
-    dispatch(isRequesting());
-    const responseApi = await requestApiCurrency();
-    dispatch(requestSucess(responseApi));
-  } catch (error) {
-    console.log(error);
-    dispatch(requestFailure(error));
-  }
+  dispatch(isRequesting());
+  const responseApi = await requestApiCurrency();
+  dispatch(requestSucess(responseApi));
 };

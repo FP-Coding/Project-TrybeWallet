@@ -1,7 +1,6 @@
 import {
   ADD_EXPENSE,
   REMOVE_EXPENSE,
-  REQUEST_FAILURE,
   REQUEST_SUCESS,
   EDIT_EXPENSE,
   SUBMIT_EDIT_EXPENSE,
@@ -28,8 +27,6 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
       currencies: Object.keys(payload).filter((symbol) => symbol !== 'USDT'),
       loading: false,
     };
-  case REQUEST_FAILURE:
-    return { ...state, error: payload.error, loading: false };
   case ADD_EXPENSE:
     return { ...state, expenses: [...state.expenses, payload] };
   case REMOVE_EXPENSE:
@@ -46,19 +43,15 @@ function wallet(state = INITIAL_STATE, { type, payload }) {
   case SUBMIT_EDIT_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses.map((expense) => {
-        if (expense.id === payload.id) {
-          return {
-            ...expense,
-            value: payload.value,
-            description: payload.description,
-            tag: payload.tag,
-            currency: payload.currency,
-            method: payload.method,
-          };
-        }
-        return expense;
-      })],
+      expenses: state.expenses.map((expense) => {
+        const editedExpense = { ...expense,
+          value: payload.value,
+          description: payload.description,
+          tag: payload.tag,
+          currency: payload.currency,
+          method: payload.method };
+        return expense.id === payload.id ? editedExpense : expense;
+      }),
       isEditing: false,
       idToEdit: '',
     };
