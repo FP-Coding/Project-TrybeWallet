@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string } from 'prop-types';
+import styled from 'styled-components';
 import roundNumber from '../helpers/roundNumber';
+import LogoTrybeWallet from '../images/TrybeWallet.png';
+
+const ContainerHeader = styled.header`
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 2vh 5vw;
+`;
 
 class Header extends Component {
   render() {
@@ -16,13 +25,18 @@ class Header extends Component {
       0,
     );
     return (
-      <header>
+      <ContainerHeader>
         <div data-testid="email-field">{email}</div>
-        <div data-testid="total-field">
-          {roundNumber(total)}
+        <img src={ LogoTrybeWallet } alt="Logo TrybeWallet" />
+        <div>
+          <span data-testid="total-field">
+            {roundNumber(total)}
+          </span>
+          <span data-testid="header-currency-field">
+            BRL
+          </span>
         </div>
-        <div data-testid="header-currency-field">BRL</div>
-      </header>
+      </ContainerHeader>
     );
   }
 }
