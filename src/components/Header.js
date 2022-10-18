@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, shape, string } from 'prop-types';
-import styled from 'styled-components';
 import roundNumber from '../helpers/roundNumber';
 import LogoTrybeWallet from '../images/TrybeWallet.png';
-
-const ContainerHeader = styled.header`
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 2vh 5vw;
-`;
+import ContainerHeader from './css/Header.styled';
 
 class Header extends Component {
   render() {
